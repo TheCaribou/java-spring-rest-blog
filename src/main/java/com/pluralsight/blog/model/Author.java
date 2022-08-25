@@ -16,6 +16,9 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    private Long version;
     private String firstname;
     private String lastname;
     @JsonIgnore
@@ -41,7 +44,7 @@ public class Author {
     }
 
     public void setPassword(String password) {
-         this.password = PASSWORD_ENCODER.encode(password);
+        this.password = PASSWORD_ENCODER.encode(password);
     }
 
     public Long getId() {
@@ -78,16 +81,19 @@ public class Author {
 
     @Override
     public boolean equals(Object obj) {
-        Author inputAuthor = (Author)obj;
+        Author inputAuthor = (Author) obj;
         if (!this.firstname.equals(inputAuthor.getFirstName())) {
             System.out.println("firstname not equal");
-            return false;}
+            return false;
+        }
         if (!this.lastname.equals(inputAuthor.getLastname())) {
             System.out.println("lastname not equal");
-            return false;}
+            return false;
+        }
         if (!this.username.equals(inputAuthor.getUsername())) {
             System.out.println("username not equal");
-            return false;}
+            return false;
+        }
         return true;
     }
 
